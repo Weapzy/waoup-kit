@@ -1,6 +1,6 @@
 ---
 name: forger-le-kit
-description: Fabrique le kit de skills WAOUP personnalisé : mène l'entretien de cadrage, lit les documents maison, écrit les skills à la voix de l'équipe et livre un plugin partageable.
+description: Fabrique le kit de skills WAOUP personnalisé et révise les skills existantes : mène l'entretien, lit les documents maison, corrige une skill du hub sans la réécrire, livre un plugin partageable.
 compatibility: Prévu pour Cowork (accès à un dossier de travail) ou Claude Code. En chat seul, la sortie est un jeu de fichiers à copier.
 license: Proprietary. Usage interne WAOUP.
 metadata:
@@ -13,6 +13,8 @@ metadata:
 Fabriquer, en une séance, le kit de skills de la personne ou de l'équipe qui est en face. Le résultat est un plugin installable et partageable.
 
 Ce n'est pas un questionnaire. C'est un entretien, mené comme WAOUP mène les siens : on part du dernier cas concret, on creuse les frictions, on ne prend jamais une opinion générale pour une donnée.
+
+Deux modes, et il faut savoir lequel on ouvre. **Forger** : un kit entier, par l'entretien en cinq temps. **Réviser** : une skill déjà publiée, corrigée d'une à trois lignes à partir d'un défaut constaté. Le second est celui qui sert toutes les semaines.
 
 ## Ce qu'il faut avant de commencer
 
@@ -65,11 +67,48 @@ Les descriptions de skills font **200 caractères au maximum** : c'est la limite
 
 Le nom du plugin est en minuscules avec tirets. Le nom de chaque dossier de skill est identique au champ `name` de son `SKILL.md`.
 
+## Réviser une skill existante
+
+Le mode révision ne fabrique rien : il corrige une skill déjà publiée, sans la refaire. Une skill n'est pas un livrable qu'on rend, c'est un actif qui se corrige.
+
+**Entrée.** Un retour du hub (`hub-waoup:journal`, `hub-waoup:ordre_du_jour`) ou un constat de passe critique : un défaut réel, daté, avec le texte fautif sous les yeux. Sans défaut nommé, il n'y a rien à réviser.
+
+```
+- [ ] 1. Lire la version courante par lire_skill
+- [ ] 2. Proposer un diff d'une à trois lignes
+- [ ] 3. Montrer le diff avant d'écrire
+- [ ] 4. Rejouer le cas dans une conversation neuve
+- [ ] 5. Préparer la note de version, en une phrase
+- [ ] 6. Publier sur accord explicite
+```
+
+Les messages exacts, les gabarits et les points de rupture sont dans `references/reviser-une-skill.md`.
+
+**1. Lire la version courante.** `hub-waoup:lire_skill` sur le nom de la skill. Jamais le fichier installé sur le disque : la copie présente dans Cowork ou dans Claude Code est un fichier de plugin, écrite par la dernière mise à jour de la place de marché et écrasée par la suivante ; ce qu'on y modifie ne sort pas du poste. La source est le hub. Relever le numéro de version et la section Pièges telle quelle.
+
+**2. Proposer un diff d'une à trois lignes.** Une ligne de procédure au plus, une ligne de Pièges au plus. La ligne de Pièges nomme l'échec réel et daté, la ligne de procédure donne le geste qui l'évite. Si le défaut demande davantage, c'est qu'il en cache plusieurs : les traiter un par un, une révision chacun.
+
+**3. Montrer avant d'écrire.** Afficher les lignes ajoutées et l'endroit exact où elles s'insèrent, puis attendre. Écrire d'abord et montrer ensuite retire à la personne la seule décision qui lui revient.
+
+**4. Rejouer le cas.** Conversation neuve, même matière, même demande qu'au moment du défaut. Le défaut a disparu, le reste du livrable tient. Sans cette étape, on a modifié un fichier, pas corrigé un défaut.
+
+**5. La note de version.** Une phrase, au présent, qui énonce la règle nouvelle et non le travail fait. Elle est ce que lira le collègue qui reçoit la mise à jour.
+
+**6. Publier.** Avec la skill `publier-au-hub`, sur accord explicite de la personne. Une fois publiée, relire le diff tel que le hub l'a enregistré avec `hub-waoup:comparer_versions` : c'est exactement ce que le collègue verra arriver.
+
+**Ce que la révision ne fait pas.**
+- Réécrire la skill. La reformuler entière fait perdre des passages qui marchaient, exactement le reproche adressé aux corrections de prompt.
+- Renommer la skill ou son dossier. Le nom relie le hub, le kit et les conversations en cours.
+- Toucher à la description. C'est elle qui décide du déclenchement, et `publier_skill` refuse une description de plus de 200 caractères.
+- Créer une skill de plus. Un défaut de skill se corrige dans cette skill.
+- Publier sans accord explicite.
+- Désinstaller quoi que ce soit.
+
 ## Enchaîner
 
 Une fois le kit produit et éprouvé :
 1. publier les skills au hub d'équipe, avec la skill `publier-au-hub` ;
-2. livrer le paquet et retirer la forge, avec la skill `passer-le-relais`.
+2. livrer le paquet et poser la fiche de reprise, avec la skill `passer-le-relais`.
 
 ## Pièges
 

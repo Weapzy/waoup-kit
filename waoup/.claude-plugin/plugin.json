@@ -1,10 +1,20 @@
 {
   "name": "waoup",
   "displayName": "Kit WAOUP",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Les procédures WAOUP : entretiens, restitution, propale, défis, deck, mise en forme chartée, voix maison et anonymisation. Un livrable, une skill.",
-  "author": { "name": "WAOUP", "url": "https://waoup.com" },
+  "author": {
+    "name": "WAOUP",
+    "url": "https://waoup.com"
+  },
   "homepage": "https://waoup.weapzy.com",
   "license": "Proprietary",
-  "keywords": ["conseil", "business-design", "entretien", "restitution", "propale", "4D"]
+  "keywords": [
+    "conseil",
+    "business-design",
+    "entretien",
+    "restitution",
+    "propale",
+    "4D"
+  ]
 }

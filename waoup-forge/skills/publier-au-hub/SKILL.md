@@ -12,6 +12,12 @@ metadata:
 
 Le hub est l'endroit où les skills de l'équipe se rangent. Sans lui, chacun garde les siennes sur son poste, et le travail de l'un ne profite jamais à l'autre.
 
+## La source est le hub, pas le fichier installé
+
+La copie d'une skill installée dans Cowork ou dans Claude Code est un fichier de plugin. Elle vient de la dernière mise à jour du kit sur la place de marché, elle sera écrasée par la suivante sans avertissement, et ce qu'on y modifie ne sort jamais du poste.
+
+Donc, dans cet ordre : lire par `hub-waoup:lire_skill`, corriger avec la Forge en mode révision (`forger-le-kit`), publier par `hub-waoup:publier_skill`. On ne bricole pas sa copie : on publie, ou on remonte un retour.
+
 ## Quand l'utiliser
 
 - Quand une skill fonctionne et mérite d'être partagée.
@@ -28,11 +34,41 @@ Le hub est l'endroit où les skills de l'équipe se rangent. Sans lui, chacun ga
 
 Une skill déjà présente au hub est mise à jour, pas dupliquée. Si la modification change la façon de travailler des autres, le dire dans la note de version.
 
+### Les deux numéros
+
+Une publication fait monter deux numéros, qui ne comptent pas la même chose.
+
+- **La skill passe en v2** au hub. C'est le numéro de la skill, celui que renvoie `lire_skill` et qu'affiche le catalogue. Il compte les corrections apportées à ce fichier.
+- **Le kit passe en 1.1.1** sur la place de marché. C'est le numéro du plugin, celui que voit Cowork. Il monte d'un cran à chaque publication, quelle que soit la skill touchée, et c'est lui qui fait apparaître le bouton Mettre à jour chez les autres.
+
+Personne ne gère ces numéros à la main : le hub numérote la skill, le déploiement monte la version du kit.
+
+### Ce que le hub renvoie
+
+La réponse de `publier_skill` est le seul endroit où les deux numéros se croisent. Elle se lit telle quelle :
+
+> Publiée : **restitution-entretien** v2 par Fanny.
+> Kit WAOUP passe en 1.1.1 sur la place de marché Weapzy/waoup-kit. Le reste de l'équipe la récupère dans Cowork : Personnaliser, Plugins, place de marché waoup, Mettre à jour.
+> Paquet ZIP (secours) : https://waoup.weapzy.com/paquets/waoup.zip
+
+Trois autres réponses possibles, et chacune veut dire quelque chose :
+
+- « Contenu identique à celui déjà sur la place de marché Weapzy/waoup-kit : rien à pousser » : le fichier envoyé est celui qui est déjà en ligne. La modification n'a pas été écrite, ou elle l'a été dans la copie installée.
+- « La place de marché n'a pas pu être mise à jour (...) » : la skill est bien au hub et le paquet ZIP est à jour, mais le bouton Mettre à jour ne proposera rien. Passer par le ZIP en attendant.
+- « Publication refusée : ... » : le plus souvent une description au-delà de 200 caractères. Reprendre celle de la version du hub, mot pour mot.
+
+### Ce que fait le collègue
+
+Rien à recevoir, rien à lire par message. De son côté : Personnaliser, Plugins, place de marché waoup, Mettre à jour. Avant d'accepter la mise à jour, il voit ce qui a changé avec `hub-waoup:comparer_versions` : les lignes ajoutées et retirées, avec les notes de version. Puis il relance son cas **dans une conversation neuve** : une conversation déjà ouverte tourne avec la version chargée à son ouverture, et il rejouerait l'ancienne skill malgré la mise à jour.
+
+Le jeton, lui, ne circule jamais dans une conversation. Il se saisit une seule fois sur la page Connecter du hub, au moment de brancher le connecteur, et il signe ensuite les publications tout seul.
+
 ## Récupérer
 
 - `hub-waoup:lister_skills` donne le catalogue : nom, description, auteur, version, dernière mise à jour.
 - `hub-waoup:chercher_skills` cherche par mot-clé dans les descriptions et les contenus.
 - `hub-waoup:lire_skill` renvoie le contenu complet d'une skill.
+- `hub-waoup:comparer_versions` montre ce qui a changé entre deux versions : lignes ajoutées, lignes retirées, notes de version. À lire avant d'accepter une mise à jour du kit.
 - `hub-waoup:paquet_installation` donne l'adresse du paquet à jour et les gestes d'installation pour chaque surface.
 
 Avant d'écrire une skill, toujours chercher au hub. La moitié du travail est souvent déjà faite.

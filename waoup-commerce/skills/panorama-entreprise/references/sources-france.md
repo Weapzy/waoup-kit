@@ -24,15 +24,15 @@ Le SIREN obtenu à l'étape 1 sert de clé partout ailleurs. Le noter en tête d
 
 ## Identité et existence légale
 
-**annuaire-entreprises.data.gouv.fr** — le service public de la DINUM. Forme juridique, dirigeants, établissements, effectif, code NAF, date de création, statut. Gratuit, sans compte. C'est la source à citer quand on veut être incontestable.
+**annuaire-entreprises.data.gouv.fr** : le service public de la DINUM. Forme juridique, dirigeants, établissements, effectif, code NAF, date de création, statut. Gratuit, sans compte. C'est la source à citer quand on veut être incontestable.
 
-**Base Sirene de l'INSEE** — l'immatriculation, les établissements, les tranches d'effectif. Utile pour situer la taille réelle d'un réseau : le siège dit une chose, le nombre d'établissements en dit une autre.
+**Base Sirene de l'INSEE** : l'immatriculation, les établissements, les tranches d'effectif. Utile pour situer la taille réelle d'un réseau : le siège dit une chose, le nombre d'établissements en dit une autre.
 
-**RNE, tenu par l'INPI** — le registre national des entreprises depuis 2023. Forme juridique, capital, dirigeants, bénéficiaires effectifs.
+**RNE, tenu par l'INPI** : le registre national des entreprises depuis 2023. Forme juridique, capital, dirigeants, bénéficiaires effectifs.
 
 ## Santé financière
 
-**Pappers** — comptes annuels quand ils sont déposés, évolution du chiffre d'affaires, résultat, effectif, statuts. La lecture la plus rapide pour préparer un rendez-vous.
+**Pappers** : comptes annuels quand ils sont déposés, évolution du chiffre d'affaires, résultat, effectif, statuts. La lecture la plus rapide pour préparer un rendez-vous.
 
 Trois précautions avant de citer un chiffre :
 
@@ -40,11 +40,11 @@ Trois précautions avant de citer un chiffre :
 - **L'exercice compte.** Un chiffre d'affaires 2024 publié en 2026 n'est pas un chiffre récent. Toujours écrire l'exercice à côté du montant.
 - **Le périmètre compte.** Les comptes d'une filiale ne disent rien du groupe, et l'inverse est encore plus vrai.
 
-**Infogreffe** — la source officielle des greffes. Les documents y sont payants, un extrait Kbis coûte quelques euros. On y va quand il faut une pièce opposable, pas pour se documenter.
+**Infogreffe** : la source officielle des greffes. Les documents y sont payants, un extrait Kbis coûte quelques euros. On y va quand il faut une pièce opposable, pas pour se documenter.
 
 ## Mouvements et signaux faibles
 
-**BODACC** (bodacc.fr) — créations, cessions, changements de dirigeants, procédures collectives, modifications de capital. Consultation gratuite, historique depuis 2008, alertes par courriel sur un compte gratuit, et une API publique.
+**BODACC** (bodacc.fr) : créations, cessions, changements de dirigeants, procédures collectives, modifications de capital. Consultation gratuite, historique depuis 2008, alertes par courriel sur un compte gratuit, et une API publique.
 
 C'est la source la plus sous-utilisée en préparation commerciale. Une cession d'établissement ou un changement de gérance datant de trois mois change la façon d'aborder un rendez-vous.
 

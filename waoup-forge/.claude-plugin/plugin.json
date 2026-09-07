@@ -1,12 +1,20 @@
 {
   "name": "waoup-forge",
   "displayName": "La Forge WAOUP",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Le plugin qui fabrique votre kit. Il vous interroge, lit vos documents, écrit vos skills à votre voix, livre le paquet partageable, puis se retire.",
-  "author": { "name": "Weapzy", "url": "https://weapzy.com" },
+  "author": {
+    "name": "Weapzy",
+    "url": "https://weapzy.com"
+  },
   "homepage": "https://waoup.weapzy.com",
   "license": "Proprietary",
-  "keywords": ["setup", "forge", "skills", "waoup"],
+  "keywords": [
+    "setup",
+    "forge",
+    "skills",
+    "waoup"
+  ],
   "userConfig": {
     "hub_url": {
       "type": "string",

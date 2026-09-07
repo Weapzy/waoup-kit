@@ -21,7 +21,7 @@ de l'organisation. Signature WAOUP, souvent oubliée, jamais à sauter.]
 
 ## 4. Synthèse par enjeu
 
-### Enjeu 1 — [titre-conclusion]
+### Enjeu 1. [titre-conclusion]
 
 | Problèmes rencontrés | Solutions envisagées par le terrain | Verbatims |
 |---|---|---|
@@ -31,7 +31,7 @@ de l'organisation. Signature WAOUP, souvent oubliée, jamais à sauter.]
 **Ce que nous en lisons.** [interprétation, annoncée comme telle]
 **À valider.** [hypothèse]
 
-### Enjeu 2 — [titre-conclusion]
+### Enjeu 2. [titre-conclusion]
 [...]
 
 ## 5. Retours sur la solution

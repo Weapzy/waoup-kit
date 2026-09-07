@@ -10,7 +10,7 @@ verbatims d'entretien, pas du brief. Si le client ne se reconnaît pas ici, il n
 pas la suite.]
 
 > « [Le verbatim qui résume l'enjeu, cité mot pour mot.] »
-> — [fonction de la personne], [date de l'entretien]
+> [fonction de la personne], [date de l'entretien]
 
 ---
 

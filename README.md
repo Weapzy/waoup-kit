@@ -65,9 +65,7 @@ claude --plugin-dir ./waoup --plugin-dir ./waoup-forge
 ### waoup-forge
 
 `forger-le-kit` mène l'entretien de forge et écrit les skills. `publier-au-hub` les partage.
-`passer-le-relais` fabrique le paquet `.plugin`, l'installe, et désinstalle la Forge.
-
-La Forge n'a pas vocation à rester installée entre deux chantiers.
+`passer-le-relais` fabrique le paquet, l'installe et pose la fiche de reprise. Chez WAOUP la Forge reste installée : elle révise les skills du kit à partir des retours du hub (section « Réviser une skill existante » de `forger-le-kit`).
 
 ## Modifier une skill
 

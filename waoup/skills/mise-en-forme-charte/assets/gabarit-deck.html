@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  WAOUP, gabarit de deck 16:9
+  Fichier : assets/gabarit-deck.html
+
+  Le pendant paysage de gabarit-livrable.html. Même feuille de style, mêmes
+  tokens, même palette : ce fichier n'ajoute qu'une couche de géométrie de
+  diapositive par-dessus waoup-charte.css.
+
+  FORMAT. 338,7 x 190,5 mm, soit 13,333 x 7,5 pouces, soit 1280 x 720 px à
+  96 dpi. Marges de 24 mm sur les côtés, 18 mm en haut et en bas : la zone de
+  sécurité, cohérente avec les 20 mm de l'A4. `overflow: hidden` sur chaque
+  diapositive : rien ne déborde, jamais.
+
+  TROIS USAGES.
+  1. Deck HTML, projeté tel quel dans un navigateur en plein écran.
+  2. PDF paysage : Chrome, Imprimer, Paysage, marges par défaut, case
+     « Graphismes d'arrière-plan » cochée.
+  3. Captures de référence pour remplir assets/waoup-modele.pptx, une par
+     mise en page.
+
+  SIX MISES EN PAGE, et pas une de plus. Ce sont exactement les six du modèle
+  PowerPoint : couverture, section, une colonne, deux colonnes, tableau,
+  verbatim. Le nom de la classe est le nom de la mise en page dans le modèle.
+
+  RÈGLES DE CONTENU, tenues par la skill et vérifiées à l'oeil.
+      Une idée par diapositive.
+      Titre : douze mots au plus, et il porte la conclusion, pas le thème.
+      Corps : 18 pt plancher, quarante mots hors tableau.
+      Cinq puces au plus, deux lignes par puce, aucun second niveau.
+      Six lignes de tableau au plus, quatre colonnes.
+      Aucun texte centré hors couverture et titre de section.
+
+  L'exemple ci-dessous est fictif. Groupe Ardan n'existe pas.
+-->
+<title>Groupe Ardan, gabarit de deck WAOUP</title>
+<link rel="stylesheet" href="waoup-charte.css">
+<style>
+/* ---------------------------------------------------------------------------
+   COUCHE DECK. Géométrie de la diapositive et échelle typographique de
+   projection. Aucune couleur nouvelle : tout vient du bloc :root de la charte.
+   -------------------------------------------------------------------------- */
+
+:root {
+  --slide-largeur: 338.7mm;
+  --slide-hauteur: 190.5mm;
+  --slide-marge-cote: 24mm;
+  --slide-marge-haut: 18mm;
+
+  /* Échelle de projection, en points. Plancher de 18 pt au corps : c'est la
+     dernière taille lisible au fond d'une salle. Titre entre 32 et 40 pt. */
+  --t-slide-couverture: 44pt;
+  --t-slide-titre: 34pt;
+  --t-slide-intertitre: 20pt;
+  --t-slide-corps: 18pt;
+  --t-slide-petit: 12pt;
+
+  /* Gouttières de grille, conformes au rapport : 48 px en deux colonnes. */
+  --slide-gouttiere: 12mm;
+}
+
+body { background: var(--gris-100); }
+
+.deck {
+  margin: 0 auto;
+  padding: var(--esp-6) 0;
+  width: var(--slide-largeur);
+}
+
+.slide {
+  position: relative;
+  width: var(--slide-largeur);
+  height: var(--slide-hauteur);
+  margin: 0 auto var(--esp-6);
+  padding: var(--slide-marge-haut) var(--slide-marge-cote);
+  background: var(--fond-page);
+  color: var(--texte);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 18px rgba(38, 35, 46, 0.14);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+/* Les deux mises en page sur fond noir. Sur fond sombre l'interligne monte et
+   l'interlettrage s'ouvre : trois axes perceptifs à compenser, pas un. */
+.slide--couverture,
+.slide--section {
+  background: var(--noir);
+  color: var(--texte-inverse);
+}
+.slide--couverture p,
+.slide--section p { line-height: 1.7; letter-spacing: 0.005em; }
+
+/* --- Titres de diapositive ------------------------------------------------ */
+
+.slide__titre {
+  font-family: var(--police-titre);
+  font-size: var(--t-slide-titre);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  padding: 0 0 4mm;
+  border: 0;
+  border-bottom: 2px solid var(--noir);
+  max-width: 26ch;
+  text-wrap: balance;
+}
+
+/* Le h2 de la charte porte une pastille lime au-dessus de son filet noir. Sur
+   une diapositive le filet passe sous le titre et la pastille reste au-dessus :
+   c'est le marqueur de section WAOUP, et il est voulu. Le poser explicitement,
+   parce qu'un modèle qui applique ses propres règles anti-générique le
+   supprimerait en croyant bien faire. */
+.slide__titre::before {
+  top: -7px;
+  width: 18mm;
+}
+
+.slide--section .slide__titre::before { content: none; }
+
+.slide__filet {
+  width: 64mm;
+  height: 5px;
+  background: var(--lime);
+  margin: 5mm 0 6mm;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+/* --- Corps ---------------------------------------------------------------- */
+
+.slide__corps {
+  flex: 1;
+  min-height: 0;
+  margin-top: 8mm;
+  font-size: var(--t-slide-corps);
+  line-height: 1.4;
+}
+
+.slide__corps p { font-size: var(--t-slide-corps); max-width: 62ch; margin: 0 0 4mm; }
+.slide__corps ul,
+.slide__corps ol { margin: 0; padding-left: 7mm; }
+.slide__corps li { font-size: var(--t-slide-corps); margin-bottom: 4mm; max-width: 58ch; }
+
+.slide__intertitre {
+  font-family: var(--police-titre);
+  font-size: var(--t-slide-intertitre);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 4mm;
+  padding: 0 0 2mm;
+  border-bottom: var(--filet) solid var(--bordure);
+}
+
+/* --- Deux colonnes -------------------------------------------------------- */
+
+.slide__colonnes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--slide-gouttiere);
+  align-items: start;
+}
+
+/* --- Pied de diapositive -------------------------------------------------- */
+
+.slide__pied {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8mm;
+  margin-top: auto;
+  padding-top: 3mm;
+  border-top: var(--filet) solid var(--bordure);
+  font-size: var(--t-slide-petit);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--texte-secondaire);
+}
+.slide--couverture .slide__pied,
+.slide--section .slide__pied {
+  border-top-color: rgba(255, 255, 255, 0.22);
+  color: var(--gris-300);
+}
+
+/* --- Couverture ----------------------------------------------------------- */
+
+.slide__marque {
+  font-family: var(--police-titre);
+  font-size: var(--t-slide-petit);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lime-sur-noir);
+  margin: 0;
+}
+
+.slide__bloc { margin-top: auto; }
+
+.slide__client {
+  font-family: var(--police-titre);
+  font-size: var(--t-slide-intertitre);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lime-sur-noir);
+  margin: 0 0 4mm;
+}
+
+.slide__grand-titre {
+  font-family: var(--police-titre);
+  font-size: var(--t-slide-couverture);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--texte-inverse);
+  border: 0;
+  padding: 0;
+  margin: 0;
+  max-width: 22ch;
+}
+
+.slide__cadrage {
+  font-size: var(--t-slide-corps);
+  color: var(--gris-300);
+  max-width: 58ch;
+  margin: 0;
+}
+
+/* --- Section -------------------------------------------------------------- */
+
+.slide--section { justify-content: center; }
+
+.slide--section .slide__titre {
+  font-size: var(--t-slide-couverture);
+  color: var(--texte-inverse);
+  border-bottom: 0;
+  padding-bottom: 0;
+  max-width: 24ch;
+}
+
+.slide__objectif {
+  font-size: var(--t-slide-corps);
+  color: var(--gris-300);
+  max-width: 56ch;
+  margin: 0;
+}
+
+/* --- Tableau -------------------------------------------------------------- */
+
+.slide__corps table { font-size: var(--t-slide-petit); margin: 0; }
+.slide__corps caption { font-size: var(--t-slide-petit); }
+.slide__corps th,
+.slide__corps td { padding: 2.5mm 3mm; font-size: var(--t-slide-petit); }
+
+/* --- Verbatim ------------------------------------------------------------- */
+
+.slide__corps blockquote { margin: 0; max-width: 100%; }
+.slide__corps blockquote p { font-size: var(--t-slide-intertitre); max-width: 52ch; }
+.slide__corps blockquote footer { font-size: var(--t-slide-petit); }
+
+.slide__lecture {
+  margin-top: 6mm;
+  font-size: var(--t-slide-corps);
+  color: var(--texte-secondaire);
+  max-width: 62ch;
+}
+
+/* ---------------------------------------------------------------------------
+   IMPRESSION. PDF paysage, une diapositive par page, sans marge de page :
+   la marge est dans la diapositive.
+   -------------------------------------------------------------------------- */
+
+@page { size: 338.7mm 190.5mm; margin: 0; }
+
+@media print {
+  /* La charte bascule html à 10,5 pt pour l'A4. Un deck se lit en points
+     absolus : on remet la base à 16 px pour que les mm et les pt tiennent. */
+  html { font-size: 16px; }
+  body { background: var(--blanc); }
+  .deck { padding: 0; width: auto; }
+  .slide {
+    margin: 0;
+    box-shadow: none;
+    break-after: page;
+    break-inside: avoid;
+  }
+  .slide:last-child { break-after: auto; }
+}
+</style>
+</head>
+<body>
+
+<article class="deck">
+
+  <!-- ====================================================================
+       1. COUVERTURE
+       Une thèse, pas un en-tête : le titre porte déjà la conclusion.
+       ==================================================================== -->
+  <section class="slide slide--couverture">
+    <p class="slide__marque">WAOUP · Business design</p>
+
+    <div class="slide__bloc">
+      <p class="slide__client">Groupe Ardan</p>
+      <h1 class="slide__grand-titre">Reprendre la main sur le parc de location</h1>
+      <div class="slide__filet"></div>
+      <p class="slide__cadrage">Dix-sept entretiens, quatre agences, trois enjeux retenus et une trajectoire à douze mois.</p>
+    </div>
+
+    <div class="slide__pied">
+      <span>Restitution de la phase Décoder</span>
+      <span>Document confidentiel, diffusion restreinte</span>
+      <span>12 septembre 2026</span>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       2. SECTION
+       Fond noir, titre de la partie, une ligne d'objectif. Rien d'autre.
+       ==================================================================== -->
+  <section class="slide slide--section">
+    <h2 class="slide__titre">Le parc tourne, la marge non</h2>
+    <div class="slide__filet"></div>
+    <p class="slide__objectif">Ce que les entretiens disent du délai entre le retour d'une machine et sa remise en location.</p>
+
+    <div class="slide__pied">
+      <span>Groupe Ardan</span>
+      <span>Partie 1 sur 3</span>
+      <span>2 / 6</span>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       3. UNE COLONNE
+       Le cas courant. Un titre qui conclut, quatre puces au plus.
+       ==================================================================== -->
+  <section class="slide slide--une-colonne">
+    <h2 class="slide__titre">Le retour de matériel n'a pas de propriétaire</h2>
+
+    <div class="slide__corps">
+      <p>Quatre personnes peuvent prendre en charge une machine qui revient, aucune n'en a la responsabilité formelle. Le temps mort tombe entre le module location et le module atelier, où aucun indicateur ne le voit.</p>
+      <ul>
+        <li>Le chauffeur dépose la machine et repart. Aucun contrôle à la descente du camion.</li>
+        <li>Le technicien découvre l'état réel en ouvrant la fiche, parfois trois jours plus tard.</li>
+        <li>Le commercial continue de vendre la machine comme disponible, puis décale le client.</li>
+      </ul>
+    </div>
+
+    <div class="slide__pied">
+      <span>Groupe Ardan</span>
+      <span>Document confidentiel, diffusion restreinte</span>
+      <span>3 / 6</span>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       4. DEUX COLONNES
+       Deux blocs de même nature. Jamais trois, jamais quatre cartes égales.
+       ==================================================================== -->
+  <section class="slide slide--deux-colonnes">
+    <h2 class="slide__titre">La bonne pratique est déjà dans la maison, sur deux familles</h2>
+
+    <div class="slide__corps slide__colonnes">
+      <div>
+        <h3 class="slide__intertitre">Ce qui tient</h3>
+        <p>Groupes électrogènes et outillage porté passent par un contrôle systématique au retour, hérité de l'agence d'Alençon. Délai annoncé et délai constaté sont les mêmes.</p>
+      </div>
+      <div>
+        <h3 class="slide__intertitre">Ce qui ne tient pas</h3>
+        <p>Nacelles, mini-pelles et compacteurs n'ont pas ce contrôle. Onze jours de remise en location sur les nacelles, contre trois annoncés au client.</p>
+      </div>
+    </div>
+
+    <div class="slide__pied">
+      <span>Groupe Ardan</span>
+      <span>Document confidentiel, diffusion restreinte</span>
+      <span>4 / 6</span>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       5. TABLEAU
+       Un tableau reste un tableau, y compris dans le PowerPoint dérivé.
+       Six lignes au plus, quatre colonnes.
+       ==================================================================== -->
+  <section class="slide slide--tableau">
+    <h2 class="slide__titre">Deux familles sur cinq tiennent leur délai</h2>
+
+    <div class="slide__corps">
+      <table>
+        <caption>Immobilisation par famille, T2 2026, quatre agences</caption>
+        <thead>
+          <tr>
+            <th scope="col">Famille</th>
+            <th scope="col" class="num">Parc</th>
+            <th scope="col" class="num">Taux d'immobilisation</th>
+            <th scope="col" class="num">Délai réel de remise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Nacelles</th><td class="num">84</td><td class="num">31 %</td><td class="num">11 j</td></tr>
+          <tr><th scope="row">Mini-pelles</th><td class="num">62</td><td class="num">18 %</td><td class="num">6 j</td></tr>
+          <tr><th scope="row">Compacteurs</th><td class="num">37</td><td class="num">24 %</td><td class="num">9 j</td></tr>
+          <tr><th scope="row">Groupes électrogènes</th><td class="num">51</td><td class="num">9 %</td><td class="num">3 j</td></tr>
+          <tr><th scope="row">Outillage porté</th><td class="num">310</td><td class="num">6 %</td><td class="num">2 j</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide__pied">
+      <span>Groupe Ardan</span>
+      <span>Source : extraction ERP, T2 2026</span>
+      <span>5 / 6</span>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       6. VERBATIM
+       Cadre fin sur quatre côtés, source en tête, virgules. Une citation par
+       diapositive, et la ligne de lecture dit ce qu'on en fait.
+       ==================================================================== -->
+  <section class="slide slide--verbatim">
+    <h2 class="slide__titre">Le planning a perdu sa crédibilité avant de perdre ses données</h2>
+
+    <div class="slide__corps">
+      <blockquote>
+        <p>« On a arrêté de regarder le planning il y a deux ans. Il ment. On appelle l'atelier, c'est plus rapide. »</p>
+        <footer>Entretien Ardan, chef d'agence, Le Havre</footer>
+      </blockquote>
+      <p class="slide__lecture">Notre lecture : remettre de la donnée dans l'outil ne suffira pas. Il faut d'abord que quelqu'un réponde du retour, sinon la donnée sera juste et personne ne la regardera.</p>
+    </div>
+
+    <div class="slide__pied">
+      <span>Groupe Ardan</span>
+      <span>Document confidentiel, diffusion restreinte</span>
+      <span>6 / 6</span>
+    </div>
+  </section>
+
+</article>
+
+</body>
+</html>

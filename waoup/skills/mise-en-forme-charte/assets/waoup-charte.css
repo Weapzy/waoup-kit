@@ -1,7 +1,7 @@
 /* =============================================================================
-   WAOUP — Feuille de style des livrables
+   WAOUP, feuille de style des livrables
    Fichier : assets/waoup-charte.css
-   Version : 1.0 — feuille autonome, sans dépendance externe.
+   Version : 1.1, feuille autonome, sans dépendance externe.
 
    ---------------------------------------------------------------------------
    À QUOI SERT CE FICHIER
@@ -39,7 +39,7 @@
    Couleur
      --noir            valeur de référence retenue ici : #26232E
      --noir-pur        #000, réservé au texte imprimé le plus dense
-     --lime            #E2FFA6 — confirmé, c'est la signature
+     --lime            #E2FFA6, confirmé, c'est la signature
      --lime-trait      dérivé plus foncé pour les filets  [À CONFIRMER]
      --cyan            cyan pastel d'appoint               [À CONFIRMER, chantier ouvert]
      --cyan-trait      dérivé foncé du cyan                [À CONFIRMER]
@@ -61,7 +61,7 @@
      --rayon, --filet                arrondis et épaisseur des filets
 
    ---------------------------------------------------------------------------
-   TOKENS DÉPRÉCIÉS — PIÈGE CONNU
+   TOKENS DÉPRÉCIÉS, PIÈGE CONNU
    ---------------------------------------------------------------------------
    `--navy` et `--forest` existent dans le waoup.css historique pour ne pas
    casser les anciens livrables. Ils rendent en NOIR. Le nom ment. Ils sont
@@ -87,7 +87,7 @@
        Chrome > Imprimer > Couleur : Noir et blanc.
 
    ---------------------------------------------------------------------------
-   IMPRESSION — À SAVOIR AVANT DE CRIER AU BUG
+   IMPRESSION, À SAVOIR AVANT DE CRIER AU BUG
    ---------------------------------------------------------------------------
    Les aplats (page de garde noire, en-têtes de tableau, encadrés) ne sortent
    que si les fonds sont autorisés. `print-color-adjust: exact` est déclaré
@@ -141,20 +141,25 @@
   --bordure: var(--gris-200);
   --bordure-forte: var(--noir);
 
-  /* Typographie */
+  /* [Correction 6] Polices documentées. "Inter" et "Space Grotesk" figurent sur la
+     liste noire des dix-sept polices surexposées ; WAOUP les garde, la distinction
+     se joue sur la grille, l'échelle et le fond. Voir references/sans-marqueur-ia.md. */
   --police-titre: "Space Grotesk", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
   --police-texte: "Inter", "Helvetica Neue", Arial, sans-serif;
   --police-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
 
-  /* Échelle typographique. 1rem vaut 16px à l'écran, 10.5pt à l'impression :
-     la bascule est faite une seule fois, sur html, dans @media print. */
-  --t-h1: 2.55rem;
-  --t-h2: 1.65rem;
-  --t-h3: 1.22rem;
-  --t-h4: 1.02rem;
+  /* [Correction 1] Échelle typographique : rapport d'au moins 1,25 entre deux niveaux
+     voisins, sinon la hiérarchie est plate (h4 valait 1,02 rem contre 1 rem au corps).
+     1rem vaut 16px à l'écran, 10.5pt à l'impression : bascule unique sur html en print. */
+  --t-h1: 2.65rem;   /* 2,65 / 2,05 = 1,29 */
+  --t-h2: 2.05rem;   /* 2,05 / 1,60 = 1,28 */
+  --t-h3: 1.6rem;    /* 1,60 / 1,25 = 1,28 */
+  --t-h4: 1.25rem;   /* 1,25 / 1,00 = 1,25 */
   --t-corps: 1rem;
   --t-petit: 0.86rem;
-  --t-micro: 0.74rem;
+  /* [Correction 2] Plancher de 11 px pour tout texte fonctionnel. 0,74 rem tombait
+     à 10,4 px une fois html basculé à 10,5 pt ; 0,8 rem tient 11,2 px à l'impression. */
+  --t-micro: 0.8rem;
 
   --interligne-corps: 1.62;
   --interligne-titre: 1.12;
@@ -168,6 +173,22 @@
   --esp-6: calc(var(--pas) * 6);
   --esp-8: calc(var(--pas) * 8);
   --esp-12: calc(var(--pas) * 12);
+
+  /* [Correction 5] Rythme au-dessus des titres. L'espace supérieur dépasse l'inférieur
+     d'au moins 12 px à chaque niveau : un titre appartient au bloc qu'il ouvre, pas à
+     celui qu'il ferme. Nommer les six valeurs empêche un modèle de les aplatir. */
+  --titre-h2-avant: var(--esp-12);  /* 72 px */
+  --titre-h2-apres: var(--esp-4);   /* 24 px, déficit 48 px */
+  --titre-h3-avant: var(--esp-8);   /* 48 px */
+  --titre-h3-apres: var(--esp-2);   /* 12 px, déficit 36 px */
+  --titre-h4-avant: var(--esp-6);   /* 36 px */
+  --titre-h4-apres: var(--esp-1);   /*  6 px, déficit 30 px */
+
+  /* [Correction 3] Le lime ne porte jamais de texte. Sur blanc il donne 1,1:1, très
+     en dessous du plancher AA de 4,5:1. Deux rôles nommés, mesurés à 15:1, et aucun
+     autre : tout `color: var(--lime)` hors de ces rôles est un défaut. */
+  --lime-sur-noir: var(--lime);   /* texte lime, uniquement sur un aplat --noir */
+  --texte-sur-lime: var(--noir);  /* texte noir, uniquement sur un aplat --lime */
 
   /* Géométrie de page. A4 portrait. Zone de texte : 170mm de large. */
   --page-format: A4 portrait;
@@ -213,7 +234,7 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-::selection { background: var(--lime); color: var(--noir); }
+::selection { background: var(--lime); color: var(--texte-sur-lime); }
 
 /* -----------------------------------------------------------------------------
    3. PAGE
@@ -263,7 +284,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--lime);
+  color: var(--lime-sur-noir);
 }
 
 .couverture__bloc { margin-top: auto; }
@@ -274,7 +295,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--lime);
+  color: var(--lime-sur-noir);
   margin: 0 0 var(--esp-3);
 }
 
@@ -339,7 +360,7 @@ body {
   font-size: var(--t-micro);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--noir);
+  color: var(--texte-sur-lime);
   background: var(--lime);
   display: inline-block;
   padding: 5px 12px;
@@ -443,7 +464,7 @@ h2 {
   font-size: var(--t-h2);
   font-weight: 700;
   letter-spacing: -0.01em;
-  margin: var(--esp-12) 0 var(--esp-4);
+  margin: var(--titre-h2-avant) 0 var(--titre-h2-apres);
   padding-top: var(--esp-3);
   border-top: var(--filet-fort) solid var(--noir);
   position: relative;
@@ -470,7 +491,7 @@ h2::before {
 h3 {
   font-size: var(--t-h3);
   font-weight: 700;
-  margin: var(--esp-8) 0 var(--esp-2);
+  margin: var(--titre-h3-avant) 0 var(--titre-h3-apres);
 }
 
 h4 {
@@ -479,7 +500,7 @@ h4 {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--gris-700);
-  margin: var(--esp-6) 0 var(--esp-1);
+  margin: var(--titre-h4-avant) 0 var(--titre-h4-apres);
 }
 
 /* -----------------------------------------------------------------------------
@@ -675,7 +696,16 @@ blockquote p:last-child,
 .verbatim p:last-child { margin-bottom: 0; }
 
 /* La source se lit AVANT la citation. `order` la remonte sans toucher au
-   HTML : <footer> reste le pied sémantique de la citation. */
+   HTML : <footer> reste le pied sémantique de la citation.
+
+   [Correction 4] Syntaxe de la source, une seule et sans exception :
+
+       <footer>Entretien Ardan, chef d'agence, Le Havre</footer>
+
+   Des virgules, rien d'autre. Ni tiret cadratin d'ouverture, ni point médian de
+   séparation : l'ancienne syntaxe cumulait deux des six tics du chrome de
+   template, et contredisait ce que la formation apprend deux slides plus tôt.
+   Ordre imposé : source, fonction, lieu. */
 blockquote footer,
 .verbatim footer,
 .verbatim__source {
@@ -772,10 +802,10 @@ blockquote footer,
   color: var(--texte-inverse);
 }
 .encadre--fort .encadre__titre {
-  color: var(--lime);
+  color: var(--lime-sur-noir);
   border-bottom-color: var(--lime);
 }
-.encadre--fort strong { color: var(--lime); }
+.encadre--fort strong { color: var(--lime-sur-noir); }
 
 /* Chiffre clé. */
 .chiffre {
