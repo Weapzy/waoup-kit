@@ -52,7 +52,7 @@ Ne jamais retirer la Forge avant que l'installation du kit soit vérifiée. Cont
 
 La Forge se réinstalle en une commande quand il faut fabriquer une nouvelle skill ou refondre le kit :
 
-- Cowork : Personnaliser, Plugins, marketplace `waoup`, installer La Forge WAOUP.
+- Cowork : Personnaliser, Plugins, place de marché `Weapzy/waoup-kit`, installer La Forge WAOUP.
 - Claude Code : `claude plugin install waoup-forge@waoup`.
 
 Elle n'a pas à rester installée entre deux chantiers.

@@ -13,13 +13,17 @@ kit/
 
 ## Installer
 
-**Cowork.** Personnaliser, Plugins, `+`, Ajouter un marketplace, coller l'adresse du dépôt
-(ou celle du hub). Puis installer les plugins voulus.
+**Cowork.** Personnaliser, Plugins, Ajouter une place de marché, coller `Weapzy/waoup-kit`
+(ou `https://github.com/Weapzy/waoup-kit`). Les trois kits apparaissent : Installer sur chacun.
+Cowork n'accepte qu'un dépôt Git public comme place de marché : le kit vit sur GitHub, et le hub
+y pousse chaque publication. Pour récupérer une skill publiée : Plugins, place de marché waoup,
+Mettre à jour. En secours, les ZIP du hub (`https://waoup.weapzy.com/paquets/<plugin>.zip`)
+s'importent par « importer un fichier » sur la page Plugins.
 
 **Claude Code**
 
 ```bash
-claude plugin marketplace add <adresse du dépôt ou du hub>
+claude plugin marketplace add Weapzy/waoup-kit
 claude plugin install waoup@waoup
 claude plugin install waoup-forge@waoup      # seulement quand on fabrique une skill
 ```
