@@ -1,0 +1,286 @@
+# Mots creux, kit WAOUP, skill voix-waoup
+#
+# Une expression par ligne. Tout ce qui suit « # » est un commentaire.
+# La casse et les deux formes d'apostrophe (' et ’) sont ignorées à la lecture.
+# Les espaces internes tolèrent les espaces multiples : « il  convient  de » est trouvé.
+#
+# Un « ? » en tête de ligne signale une expression dont le caractère fautif
+# dépend du sens. Le script la sort en « à vérifier », le rédacteur arbitre.
+# Exemple : « levier » est creux dans « actionner les bons leviers », légitime
+# dans « le levier de la benne ».
+#
+# Cette liste est faite pour grossir. Quand un mot revient dans une relecture,
+# on l'ajoute ici, pas dans la conversation.
+
+# ---------------------------------------------------------------------------
+# Le vocabulaire de séminaire
+# ---------------------------------------------------------------------------
+synergie
+synergies
+holistique
+holistiques
+écosystème
+écosystèmes
+transversalité
+verticalité
+ADN de la marque
+la promesse de marque
+la raison d'être
+le sens profond
+la vision partagée
+l'intelligence collective
+la co-construction
+co-construire
+la démarche collaborative
+la dynamique vertueuse
+le cercle vertueux
+la boucle vertueuse
+l'effet vertueux
+la montée en puissance
+la montée en compétence
+? l'accompagnement au changement
+la conduite du changement
+l'acculturation
+? l'appropriation
+la prise de conscience collective
+la culture du résultat
+l'excellence opérationnelle
+la performance globale
+l'amélioration continue
+la création de valeur
+la chaîne de valeur
+la proposition de valeur
+l'expérience utilisateur augmentée
+? l'expérience client
+l'orientation client
+le client au centre
+mettre le client au centre
+placer l'humain au coeur
+au coeur de la démarche
+au coeur du dispositif
+au coeur du réacteur
+
+# ---------------------------------------------------------------------------
+# Les adjectifs qui ne mesurent rien
+# ---------------------------------------------------------------------------
+robuste
+robustes
+solide et pérenne
+pérenne
+pérennes
+structurant
+structurante
+structurants
+structurantes
+impactant
+impactante
+impactants
+impactantes
+différenciant
+différenciante
+disruptif
+disruptive
+disruptifs
+agile
+agiles
+? innovant
+? innovante
+ambitieux et réaliste
+véritable
+véritables
+authentique
+? authentiques
+incontournable
+incontournables
+essentiel et stratégique
+crucial
+cruciale
+primordial
+primordiale
+fondamental et structurant
+riche et varié
+riches et variés
+unique en son genre
+sans précédent
+inédit et prometteur
+
+# ---------------------------------------------------------------------------
+# Les métaphores usées du conseil
+# ---------------------------------------------------------------------------
+pierre angulaire
+clé de voûte
+fil rouge
+fil conducteur
+? feuille de route
+colonne vertébrale
+socle commun
+socle fondateur
+? levier
+? leviers
+actionner les leviers
+actionner les bons leviers
+? boîte à outils
+? terrain de jeu
+? point de bascule
+changement de paradigme
+nouveau paradigme
+? nouvelle donne
+? game changer
+? état de l'art
+la partie immergée de l'iceberg
+le nerf de la guerre
+la cerise sur le gâteau
+un cercle vertueux
+mettre l'église au milieu du village
+casser les silos
+sortir du cadre
+penser out of the box
+changer de braquet
+passer à la vitesse supérieure
+donner du sens
+créer du lien
+faire système
+faire sens
+
+# ---------------------------------------------------------------------------
+# Les tournures impersonnelles
+# ---------------------------------------------------------------------------
+il convient de
+il convient d'
+il est important de
+il est important de noter
+il est essentiel de
+il est primordial de
+il est intéressant de noter
+il est à noter que
+il n'en demeure pas moins
+force est de constater
+force est de reconnaître
+on ne peut que constater
+il apparaît clairement que
+il ressort clairement que
+il va sans dire que
+nul besoin de rappeler
+rappelons que
+soulignons que
+notons que
+précisons que
+on l'aura compris
+comme chacun sait
+chacun en conviendra
+
+# ---------------------------------------------------------------------------
+# Les ouvertures de dissertation
+# ---------------------------------------------------------------------------
+dans un monde où
+dans un contexte où
+dans un environnement de plus en plus
+à l'ère de
+à l'heure de
+à l'heure où
+plus que jamais
+aujourd'hui plus que jamais
+face aux enjeux actuels
+face aux défis de demain
+dans un marché en constante évolution
+en constante évolution
+en perpétuelle mutation
+en pleine transformation
+à l'aube de
+au carrefour de
+à la croisée des chemins
+
+# ---------------------------------------------------------------------------
+# Les anglicismes de plaquette
+# ---------------------------------------------------------------------------
+best practice
+best practices
+? benchmark
+quick win
+quick wins
+low hanging fruit
+mindset
+état d'esprit gagnant
+? roadmap
+? workshop
+? brainstorming
+? design thinking
+? user centric
+customer centric
+data driven
+? scalable
+scalabilité
+? asset
+? insight
+? insights
+? pain point
+pain points
+value proposition
+? deliverable
+? framework
+? empowerment
+? onboarding
+? key learnings
+takeaway
+takeaways
+top of mind
+must have
+nice to have
+win-win
+gagnant-gagnant
+end to end
+de bout en bout
+
+# ---------------------------------------------------------------------------
+# Les quantificateurs qui ne quantifient pas
+# ---------------------------------------------------------------------------
+un certain nombre de
+une multitude de
+une pluralité de
+de nombreux acteurs
+de multiples facteurs
+plusieurs éléments
+divers aspects
+différents axes
+? un panel
+un large éventail
+toute une série de
+significativement
+de manière significative
+de façon notable
+sensiblement
+notablement
+? nettement
+considérablement
+substantiellement
+
+# ---------------------------------------------------------------------------
+# Le remplissage de transition
+# ---------------------------------------------------------------------------
+par ailleurs
+en outre
+de surcroît
+qui plus est
+à ce titre
+dans cette optique
+dans cette perspective
+dans ce cadre
+dans cette dynamique
+? dans ce contexte
+en ce sens
+de ce fait
+partant de ce constat
+fort de ce constat
+? cela dit
+? ceci dit
+d'une part, d'autre part
+tant sur le plan
+sur le plan opérationnel comme stratégique
+
+# ---------------------------------------------------------------------------
+# Vocabulaire maison WAOUP : à ne jamais signaler
+# ---------------------------------------------------------------------------
+# Les quatre phases de la méthode 4D sont des noms propres de méthode, pas du
+# jargon. Décoder, Designer, Démontrer, Déployer. De même pour « défis »,
+# « restitution », « marathon », qui désignent des livrables nommés.
+# Ces mots ne figurent pas dans la liste ci-dessus, et ne doivent pas y entrer.

@@ -1,0 +1,32 @@
+{
+  "name": "waoup-forge",
+  "displayName": "La Forge WAOUP",
+  "version": "1.0.0",
+  "description": "Le plugin qui fabrique votre kit. Il vous interroge, lit vos documents, écrit vos skills à votre voix, livre le paquet partageable, puis se retire.",
+  "author": { "name": "Weapzy", "url": "https://weapzy.com" },
+  "homepage": "https://waoup.weapzy.com",
+  "license": "Proprietary",
+  "keywords": ["setup", "forge", "skills", "waoup"],
+  "userConfig": {
+    "hub_url": {
+      "type": "string",
+      "title": "Adresse du hub WAOUP",
+      "description": "L'adresse du hub de partage des skills. Laisser la valeur par défaut si vous n'en avez pas d'autre.",
+      "default": "https://waoup.weapzy.com",
+      "required": false
+    },
+    "hub_jeton": {
+      "type": "string",
+      "title": "Jeton du hub",
+      "description": "Le jeton personnel remis pendant la formation. Sert à publier vos skills sous votre nom.",
+      "sensitive": true,
+      "required": false
+    },
+    "prenom": {
+      "type": "string",
+      "title": "Votre prénom",
+      "description": "Sert à signer les skills que vous publiez.",
+      "required": false
+    }
+  }
+}

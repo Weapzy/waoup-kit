@@ -1,0 +1,1064 @@
+/* =============================================================================
+   WAOUP — Feuille de style des livrables
+   Fichier : assets/waoup-charte.css
+   Version : 1.0 — feuille autonome, sans dépendance externe.
+
+   ---------------------------------------------------------------------------
+   À QUOI SERT CE FICHIER
+   ---------------------------------------------------------------------------
+   Ce fichier est une charte de secours, écrite pour tenir seule tant que le
+   `waoup.css` maison n'est pas déposé dans ce dossier. Il couvre un document
+   imprimable : page de garde, sommaire, titres, corps, listes, tableaux,
+   verbatims, encadrés, pied de page avec mention de confidentialité.
+   Il vise l'écran ET le PDF. Rien d'autre.
+
+   ---------------------------------------------------------------------------
+   BRANCHER LE VRAI waoup.css
+   ---------------------------------------------------------------------------
+   Quand WAOUP fournit son `waoup.css`, deux façons de faire.
+
+   1. Superposition (recommandée, réversible). Charger les deux, dans cet ordre :
+
+        <link rel="stylesheet" href="assets/waoup-charte.css">
+        <link rel="stylesheet" href="assets/waoup.css">
+
+      La charte maison gagne sur tout ce qu'elle redéfinit. Ce fichier continue
+      de fournir la pagination, les sauts de page et les règles d'impression,
+      que les CSS d'écran ne couvrent presque jamais.
+
+   2. Reprise des tokens (définitive). Ne garder que la partie `@page` et
+      `@media print` de ce fichier, et remplacer le bloc `:root` par celui de
+      `waoup.css`.
+
+   ---------------------------------------------------------------------------
+   TOKENS À REMPLACER PAR LES VALEURS OFFICIELLES
+   ---------------------------------------------------------------------------
+   Un par un, dans le bloc `:root` ci-dessous. Les valeurs marquées [À CONFIRMER]
+   sont des approximations assumées, pas des valeurs de charte.
+
+   Couleur
+     --noir            valeur de référence retenue ici : #26232E
+     --noir-pur        #000, réservé au texte imprimé le plus dense
+     --lime            #E2FFA6 — confirmé, c'est la signature
+     --lime-trait      dérivé plus foncé pour les filets  [À CONFIRMER]
+     --cyan            cyan pastel d'appoint               [À CONFIRMER, chantier ouvert]
+     --cyan-trait      dérivé foncé du cyan                [À CONFIRMER]
+     --argile          seconde teinte d'appoint            [À CONFIRMER]
+     --argile-trait    dérivé foncé de l'argile            [À CONFIRMER]
+     --gris-900 … --gris-050   échelle de gris             [À CONFIRMER]
+     --papier          fond de page                        [À CONFIRMER]
+
+   Typographie
+     --police-titre    polices de titrage de la charte     [À CONFIRMER]
+     --police-texte    police de labeur de la charte       [À CONFIRMER]
+     --police-mono     police à chasse fixe                [À CONFIRMER]
+     Si la charte impose des polices non système, les embarquer en @font-face
+     avec les fichiers .woff2 dans ce même dossier. Sans embarquement, le PDF
+     se dégrade en Arial chez le client.
+
+   Géométrie
+     --page-format, --page-marge-*   format et marges d'impression
+     --rayon, --filet                arrondis et épaisseur des filets
+
+   ---------------------------------------------------------------------------
+   TOKENS DÉPRÉCIÉS — PIÈGE CONNU
+   ---------------------------------------------------------------------------
+   `--navy` et `--forest` existent dans le waoup.css historique pour ne pas
+   casser les anciens livrables. Ils rendent en NOIR. Le nom ment. Ils sont
+   reproduits ici à l'identique pour que d'anciens gabarits continuent de
+   s'afficher, et pour aucune autre raison. Ne jamais les employer dans un
+   nouveau document.
+
+   ---------------------------------------------------------------------------
+   RÈGLE DE COULEUR
+   ---------------------------------------------------------------------------
+   Le lime accentue : filet sous un titre, soulignement d'étiquette, puces,
+   surlignage. Il ne remplit pas d'aplat entier, ni un fond de page, ni un
+   tableau. Il ne borde pas non plus : pas d'onglet coloré épais sur le côté
+   gauche d'un bloc. Une page qui a plus de lime que de blanc est hors charte.
+
+   ---------------------------------------------------------------------------
+   LISIBILITÉ EN NOIR ET BLANC
+   ---------------------------------------------------------------------------
+   Les livrables WAOUP finissent photocopiés. Aucun bloc ne se distingue par
+   sa seule couleur : verbatims et encadrés portent tous un cadre fin sur les
+   quatre côtés et une étiquette en tête. Retirer la couleur ne doit rien
+   coûter à la compréhension. Le vérifier avant de livrer :
+       Chrome > Imprimer > Couleur : Noir et blanc.
+
+   ---------------------------------------------------------------------------
+   IMPRESSION — À SAVOIR AVANT DE CRIER AU BUG
+   ---------------------------------------------------------------------------
+   Les aplats (page de garde noire, en-têtes de tableau, encadrés) ne sortent
+   que si les fonds sont autorisés. `print-color-adjust: exact` est déclaré
+   partout où il faut, mais Chrome laisse le dernier mot à la case
+   « Graphismes d'arrière-plan » de sa boîte de dialogue d'impression. En ligne
+   de commande, `--print-to-pdf` respecte la déclaration CSS.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. TOKENS
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Signature */
+  --noir: #26232E;
+  --noir-pur: #000000;
+  --lime: #E2FFA6;
+  --lime-trait: #B4DE68;
+
+  /* Deux teintes d'appoint, sobres. Elles servent à distinguer un encadré
+     d'un autre, jamais à décorer. */
+  --cyan: #C7E7EF;
+  --cyan-trait: #4E8A9C;
+  --argile: #EADFCE;
+  --argile-trait: #9A7434;
+
+  /* Voiles. Un encadré se pose sur un fond à peine teinté : la distinction
+     vient du cadre et de l'étiquette, la couleur ne fait que confirmer. */
+  --lime-voile: #F6FFE7;
+  --cyan-voile: #EFF8FB;
+  --argile-voile: #FAF5EE;
+
+  /* Échelle de gris */
+  --gris-900: #26232E;
+  --gris-700: #4A4653;
+  --gris-500: #6F6A7D;
+  --gris-400: #948FA1;
+  --gris-300: #B9B5C2;
+  --gris-200: #DCD9E1;
+  --gris-100: #EEECF1;
+  --gris-050: #F7F6F9;
+  --blanc: #FFFFFF;
+  --papier: #FFFFFF;
+
+  /* Rôles. Modifier ici plutôt que dans les règles. */
+  --texte: var(--noir);
+  --texte-secondaire: var(--gris-500);
+  --texte-inverse: var(--blanc);
+  --fond-page: var(--papier);
+  --fond-doux: var(--gris-050);
+  --bordure: var(--gris-200);
+  --bordure-forte: var(--noir);
+
+  /* Typographie */
+  --police-titre: "Space Grotesk", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --police-texte: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --police-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  /* Échelle typographique. 1rem vaut 16px à l'écran, 10.5pt à l'impression :
+     la bascule est faite une seule fois, sur html, dans @media print. */
+  --t-h1: 2.55rem;
+  --t-h2: 1.65rem;
+  --t-h3: 1.22rem;
+  --t-h4: 1.02rem;
+  --t-corps: 1rem;
+  --t-petit: 0.86rem;
+  --t-micro: 0.74rem;
+
+  --interligne-corps: 1.62;
+  --interligne-titre: 1.12;
+
+  /* Rythme vertical. Une seule unité, tous les espacements en sont dérivés. */
+  --pas: 6px;
+  --esp-1: calc(var(--pas) * 1);
+  --esp-2: calc(var(--pas) * 2);
+  --esp-3: calc(var(--pas) * 3);
+  --esp-4: calc(var(--pas) * 4);
+  --esp-6: calc(var(--pas) * 6);
+  --esp-8: calc(var(--pas) * 8);
+  --esp-12: calc(var(--pas) * 12);
+
+  /* Géométrie de page. A4 portrait. Zone de texte : 170mm de large. */
+  --page-format: A4 portrait;
+  --page-largeur: 210mm;
+  --page-marge-haut: 24mm;
+  --page-marge-bas: 26mm;
+  --page-marge-cote: 20mm;
+  --pied-hauteur: 12mm;
+
+  --rayon: 3px;
+  --filet: 1px;
+  --filet-fort: 2px;
+
+  /* --------------------------------------------------------------------------
+     DÉPRÉCIÉS. Rendent en noir malgré leur nom. Compatibilité uniquement.
+     -------------------------------------------------------------------------- */
+  --navy: var(--noir);
+  --forest: var(--noir);
+}
+
+/* -----------------------------------------------------------------------------
+   2. BASE
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--police-texte);
+  font-size: var(--t-corps);
+  line-height: var(--interligne-corps);
+  color: var(--texte);
+  background: var(--gris-100);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
+}
+
+::selection { background: var(--lime); color: var(--noir); }
+
+/* -----------------------------------------------------------------------------
+   3. PAGE
+   La page est l'unité. À l'écran elle simule une feuille A4 posée sur un fond
+   gris. À l'impression elle disparaît et laisse @page faire le travail.
+   -------------------------------------------------------------------------- */
+
+.doc {
+  margin: 0 auto;
+  padding: var(--esp-8) 0;
+}
+
+.page {
+  width: var(--page-largeur);
+  min-height: 297mm;
+  margin: 0 auto var(--esp-6);
+  padding: var(--page-marge-haut) var(--page-marge-cote) var(--page-marge-bas);
+  background: var(--fond-page);
+  box-shadow: 0 2px 18px rgba(38, 35, 46, 0.14);
+  position: relative;
+}
+
+/* Forcer un début de page. Sur .page, le saut est déjà implicite. */
+.saut-page { break-before: page; }
+.pas-de-coupe { break-inside: avoid; }
+
+/* -----------------------------------------------------------------------------
+   4. PAGE DE GARDE
+   Fond noir pleine page, un filet lime, la marque, le titre, le cartouche.
+   -------------------------------------------------------------------------- */
+
+.couverture {
+  background: var(--noir);
+  color: var(--texte-inverse);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 297mm;
+  padding: 34mm var(--page-marge-cote) 26mm;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.couverture__marque {
+  font-family: var(--police-titre);
+  font-size: var(--t-petit);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+
+.couverture__bloc { margin-top: auto; }
+
+.couverture__client {
+  font-family: var(--police-titre);
+  font-size: var(--t-h3);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin: 0 0 var(--esp-3);
+}
+
+.couverture__titre {
+  /* C'est un h1 : le filet lime et les marges de la règle générique n'ont
+     rien à faire ici, la couverture a déjà son propre filet. */
+  border-bottom: 0;
+  padding-bottom: 0;
+  font-family: var(--police-titre);
+  font-size: 3.3rem;
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--texte-inverse);
+  max-width: 22ch;
+}
+
+/* Le filet lime : la seule zone de couleur pleine de la couverture. */
+.couverture__filet {
+  width: 64mm;
+  height: 5px;
+  background: var(--lime);
+  margin: var(--esp-6) 0 var(--esp-4);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.couverture__sous-titre {
+  font-size: var(--t-corps);
+  color: var(--gris-300);
+  max-width: 62ch;
+  margin: 0;
+}
+
+.couverture__cartouche {
+  margin-top: var(--esp-12);
+  border-top: var(--filet) solid rgba(255, 255, 255, 0.22);
+  padding-top: var(--esp-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-4) var(--esp-6);
+  font-size: var(--t-micro);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gris-300);
+}
+
+.couverture__cartouche dt {
+  color: var(--gris-500);
+  margin-bottom: 2px;
+}
+
+.couverture__cartouche dd {
+  margin: 0;
+  color: var(--texte-inverse);
+  font-weight: 600;
+}
+
+.couverture__confidentiel {
+  margin-top: var(--esp-6);
+  font-size: var(--t-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--noir);
+  background: var(--lime);
+  display: inline-block;
+  padding: 5px 12px;
+  font-weight: 700;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.couverture__confidentiel:empty { display: none; }
+
+/* -----------------------------------------------------------------------------
+   5. SOMMAIRE
+   Pas de numéros de page : un navigateur ne sait pas les calculer avant
+   l'impression. Si un jour la chaîne passe par Paged.js ou WeasyPrint,
+   activer le bloc `target-counter` commenté plus bas.
+   -------------------------------------------------------------------------- */
+
+.sommaire__titre {
+  font-family: var(--police-titre);
+  font-size: var(--t-h3);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 var(--esp-4);
+  padding: 0 0 var(--esp-2);
+  /* C'est un h2 : sans ces trois lignes, il hérite du filet supérieur et de
+     la pastille lime, qui débordaient sur la page précédente. */
+  border-top: 0;
+  border-bottom: var(--filet-fort) solid var(--noir);
+}
+
+.sommaire__titre::before { content: none; }
+
+.sommaire ol {
+  list-style: none;
+  counter-reset: sommaire;
+  margin: 0;
+  padding: 0;
+}
+
+.sommaire li {
+  counter-increment: sommaire;
+  border-bottom: var(--filet) solid var(--bordure);
+  padding: var(--esp-2) 0;
+  break-inside: avoid;
+}
+
+.sommaire a {
+  display: flex;
+  gap: var(--esp-3);
+  color: var(--texte);
+  text-decoration: none;
+  font-family: var(--police-titre);
+  font-size: var(--t-corps);
+  font-weight: 500;
+}
+
+.sommaire a::before {
+  content: counter(sommaire, decimal-leading-zero);
+  color: var(--gris-400);
+  font-variant-numeric: tabular-nums;
+  min-width: 3ch;
+}
+
+.sommaire a:hover { color: var(--gris-700); }
+
+/* Version moteur paginé. À activer seulement avec Paged.js / WeasyPrint /
+   Prince, jamais avec l'impression navigateur.
+   .sommaire a::after {
+     content: leader('.') target-counter(attr(href), page);
+     flex: 1;
+     color: var(--gris-400);
+   }
+*/
+
+/* -----------------------------------------------------------------------------
+   6. TITRES
+   -------------------------------------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--police-titre);
+  line-height: var(--interligne-titre);
+  color: var(--texte);
+  break-after: avoid;
+  break-inside: avoid;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--t-h1);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--esp-6);
+  padding-bottom: var(--esp-3);
+  border-bottom: 4px solid var(--lime);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+/* h2 : la marque d'une section. Filet noir au-dessus, pastille lime devant. */
+h2 {
+  font-size: var(--t-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: var(--esp-12) 0 var(--esp-4);
+  padding-top: var(--esp-3);
+  border-top: var(--filet-fort) solid var(--noir);
+  position: relative;
+}
+
+/* La pastille se pose SUR le filet, sans le couper : elle occupe les 5 px
+   au-dessus des 2 px de bordure. Le filet reste donc continu en noir et
+   blanc, où le lime vire au gris très clair et creuserait un trou. */
+h2::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 0;
+  width: 22mm;
+  height: 5px;
+  background: var(--lime);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.page > h2:first-child,
+.corps > h2:first-child { margin-top: 0; }
+
+h3 {
+  font-size: var(--t-h3);
+  font-weight: 700;
+  margin: var(--esp-8) 0 var(--esp-2);
+}
+
+h4 {
+  font-size: var(--t-h4);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gris-700);
+  margin: var(--esp-6) 0 var(--esp-1);
+}
+
+/* -----------------------------------------------------------------------------
+   7. CORPS
+   -------------------------------------------------------------------------- */
+
+p {
+  margin: 0 0 var(--esp-3);
+  orphans: 3;
+  widows: 3;
+  max-width: 78ch;
+}
+
+.chapo {
+  font-size: 1.12rem;
+  line-height: 1.5;
+  color: var(--gris-700);
+  margin-bottom: var(--esp-6);
+  max-width: 66ch;
+}
+
+strong, b { font-weight: 700; color: var(--noir); }
+em, i { font-style: italic; }
+
+a {
+  color: var(--noir);
+  text-decoration: underline;
+  text-decoration-color: var(--lime-trait);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+a:hover { text-decoration-color: var(--noir); }
+
+/* Surlignage lime. Le seul usage décoratif toléré dans le corps. */
+mark {
+  background: var(--lime);
+  color: var(--noir);
+  padding: 0 3px;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+hr {
+  border: 0;
+  border-top: var(--filet) solid var(--bordure);
+  margin: var(--esp-8) 0;
+}
+
+small { font-size: var(--t-petit); color: var(--texte-secondaire); }
+
+/* -----------------------------------------------------------------------------
+   8. LISTES
+   -------------------------------------------------------------------------- */
+
+ul, ol {
+  margin: 0 0 var(--esp-3);
+  padding-left: var(--esp-4);
+  max-width: 78ch;
+}
+
+li {
+  margin-bottom: var(--esp-1);
+  orphans: 2;
+  widows: 2;
+}
+
+li > ul,
+li > ol { margin-top: var(--esp-1); margin-bottom: 0; }
+
+ul { list-style: none; padding-left: var(--esp-4); }
+
+ul > li { position: relative; }
+
+ul > li::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--esp-4) * -1);
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  background: var(--lime-trait);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+ol { list-style: decimal; }
+ol > li::marker { font-weight: 700; color: var(--gris-700); }
+
+/* -----------------------------------------------------------------------------
+   9. TABLEAUX
+   Un tableau reste un tableau. Jamais une image.
+   -------------------------------------------------------------------------- */
+
+.tableau-conteneur { overflow-x: auto; margin: 0 0 var(--esp-6); }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-petit);
+  margin: 0 0 var(--esp-6);
+  break-inside: auto;
+}
+
+caption {
+  caption-side: top;
+  text-align: left;
+  font-family: var(--police-titre);
+  font-size: var(--t-petit);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gris-700);
+  padding-bottom: var(--esp-1);
+}
+
+thead th {
+  background: var(--noir);
+  color: var(--texte-inverse);
+  font-family: var(--police-titre);
+  font-size: var(--t-micro);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: var(--esp-2);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+tbody td,
+tbody th {
+  padding: var(--esp-2);
+  border-bottom: var(--filet) solid var(--bordure);
+  vertical-align: top;
+  text-align: left;
+}
+
+tbody th { font-weight: 700; }
+tbody tr:nth-child(even) { background: var(--gris-050); }
+tbody tr { break-inside: avoid; }
+
+tbody tr:last-child td,
+tbody tr:last-child th { border-bottom: var(--filet-fort) solid var(--noir); }
+
+tfoot td,
+tfoot th {
+  padding: var(--esp-2);
+  font-weight: 700;
+  border-top: var(--filet-fort) solid var(--noir);
+}
+
+/* Colonne de chiffres : alignée à droite, chasse fixe. */
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* -----------------------------------------------------------------------------
+   10. VERBATIM
+   Le style distinctif d'une citation de terrain. Il ne ressemble à rien
+   d'autre dans le document : c'est le point.
+   -------------------------------------------------------------------------- */
+
+/* Cadre fin sur les quatre côtés, fond à peine teinté, étiquette de source en
+   tête. Aucun onglet coloré à gauche : un filet épais d'un seul côté est la
+   signature visuelle des blocs générés à la chaîne, et il disparaît de toute
+   façon sur une photocopie. Le cadre et l'étiquette, eux, survivent au noir
+   et blanc. Le retrait à gauche est une convention d'édition, pas un filet. */
+blockquote,
+.verbatim {
+  display: flex;
+  flex-direction: column;
+  margin: var(--esp-6) 0 var(--esp-6) var(--esp-4);
+  padding: var(--esp-3) var(--esp-4);
+  border: var(--filet) solid var(--gris-300);
+  border-radius: var(--rayon);
+  background: var(--fond-doux);
+  break-inside: avoid;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+blockquote p,
+.verbatim p {
+  font-family: var(--police-titre);
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.46;
+  color: var(--noir);
+  margin: 0 0 var(--esp-2);
+  max-width: 60ch;
+}
+
+blockquote p:last-child,
+.verbatim p:last-child { margin-bottom: 0; }
+
+/* La source se lit AVANT la citation. `order` la remonte sans toucher au
+   HTML : <footer> reste le pied sémantique de la citation. */
+blockquote footer,
+.verbatim footer,
+.verbatim__source {
+  order: -1;
+  align-self: flex-start;
+  font-family: var(--police-mono);
+  font-style: normal;
+  font-size: var(--t-micro);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gris-700);
+  border-bottom: var(--filet-fort) solid var(--lime-trait);
+  padding-bottom: 3px;
+  margin: 0 0 var(--esp-3);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+/* -----------------------------------------------------------------------------
+   11. ENCADRÉS
+   Quatre intentions. Chacune se lit à trois signes : le cadre fin, l'étiquette
+   en tête, le voile de fond. Le signal de couleur est porté par l'étiquette,
+   jamais par un bord épais. Testé en niveaux de gris : un encadré qui ne se
+   distingue que par sa teinte disparaît sur une photocopie, un cadre et une
+   étiquette restent lisibles.
+   -------------------------------------------------------------------------- */
+
+.encadre {
+  margin: var(--esp-6) 0;
+  padding: var(--esp-3) var(--esp-4);
+  border: var(--filet) solid var(--gris-300);
+  border-radius: var(--rayon);
+  background: var(--blanc);
+  break-inside: avoid;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.encadre__titre {
+  display: inline-block;
+  font-family: var(--police-mono);
+  font-size: var(--t-micro);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 var(--esp-3);
+  padding-bottom: 3px;
+  color: var(--gris-700);
+  border-bottom: var(--filet-fort) solid var(--gris-400);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.encadre > p:last-child,
+.encadre > ul:last-child,
+.encadre > ol:last-child { margin-bottom: 0; }
+
+/* À retenir. Cadre noir, voile lime, étiquette soulignée de lime : c'est le
+   plus appuyé des quatre, et il reste lisible en gris. */
+.encadre--cle {
+  background: var(--lime-voile);
+  border-color: var(--noir);
+}
+.encadre--cle .encadre__titre {
+  color: var(--noir);
+  border-bottom-color: var(--lime-trait);
+}
+
+/* Information de contexte. */
+.encadre--info {
+  background: var(--cyan-voile);
+  border-color: var(--cyan-trait);
+}
+.encadre--info .encadre__titre {
+  color: var(--cyan-trait);
+  border-bottom-color: var(--cyan-trait);
+}
+
+/* Point de vigilance. */
+.encadre--alerte {
+  background: var(--argile-voile);
+  border-color: var(--argile-trait);
+}
+.encadre--alerte .encadre__titre {
+  color: var(--argile-trait);
+  border-bottom-color: var(--argile-trait);
+}
+
+/* Affirmation forte, en inverse. Un par document, pas deux. */
+.encadre--fort {
+  background: var(--noir);
+  border-color: var(--noir);
+  color: var(--texte-inverse);
+}
+.encadre--fort .encadre__titre {
+  color: var(--lime);
+  border-bottom-color: var(--lime);
+}
+.encadre--fort strong { color: var(--lime); }
+
+/* Chiffre clé. */
+.chiffre {
+  display: flex;
+  align-items: baseline;
+  gap: var(--esp-3);
+  margin: var(--esp-4) 0;
+  break-inside: avoid;
+}
+
+.chiffre__valeur {
+  font-family: var(--police-titre);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  border-bottom: 5px solid var(--lime);
+  padding-bottom: 2px;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.chiffre__libelle {
+  font-size: var(--t-petit);
+  color: var(--gris-700);
+  max-width: 40ch;
+}
+
+/* -----------------------------------------------------------------------------
+   12. CODE
+   -------------------------------------------------------------------------- */
+
+code, kbd, samp {
+  font-family: var(--police-mono);
+  font-size: 0.88em;
+  background: var(--gris-100);
+  padding: 1px 4px;
+  border-radius: var(--rayon);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+pre {
+  font-family: var(--police-mono);
+  font-size: var(--t-micro);
+  line-height: 1.5;
+  background: var(--noir);
+  color: var(--gris-100);
+  padding: var(--esp-3);
+  border-radius: var(--rayon);
+  overflow-x: auto;
+  margin: 0 0 var(--esp-6);
+  break-inside: avoid;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* -----------------------------------------------------------------------------
+   13. EN-TÊTE ET PIED COURANTS
+   Mesuré sur Chrome 14x, headless et boîte d'impression : `position: fixed`
+   se répète bien sur chaque page, mais ne réserve aucune place et se recale
+   au bord de la zone de texte. `bottom: -16mm`, `top: 250mm` et
+   `translateY()` remontent tous en haut de page. Le pied écrasait donc les
+   dernières lignes.
+   Le seul mécanisme qui répète ET réserve la hauteur est le groupe
+   thead / tfoot d'un tableau. Le document est donc enveloppé dans
+   `<table class="grille">`, neutralisée en blocs à l'écran, redevenue
+   tableau à l'impression. La couverture reste HORS de la grille : elle ne
+   doit porter ni en-tête ni pied.
+   -------------------------------------------------------------------------- */
+
+.grille,
+.grille > thead,
+.grille > tbody,
+.grille > tfoot,
+.grille > * > tr,
+.grille > * > tr > td {
+  display: block;
+  width: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.entete-courant,
+.pied-courant {
+  display: none;
+  font-size: var(--t-micro);
+  letter-spacing: 0.06em;
+  color: var(--gris-500);
+}
+
+/* Pied visible à l'écran, une fois, en fin de document. */
+.pied {
+  width: var(--page-largeur);
+  margin: 0 auto var(--esp-8);
+  padding: var(--esp-3) var(--page-marge-cote);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--esp-4);
+  border-top: var(--filet-fort) solid var(--noir);
+  background: var(--fond-page);
+  font-size: var(--t-micro);
+  letter-spacing: 0.06em;
+  color: var(--gris-500);
+}
+
+.pied__mention {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--noir);
+}
+
+.pied__mention:empty { display: none; }
+
+/* -----------------------------------------------------------------------------
+   14. IMPRESSION
+   -------------------------------------------------------------------------- */
+
+@page {
+  size: A4 portrait;
+  /* L'en-tête et le pied courants prennent leur hauteur dans la zone de
+     texte, pas dans ces marges : inutile de sur-marger en haut et en bas. */
+  margin: 18mm 20mm 18mm;
+}
+
+/* La couverture occupe la feuille entière : pas de marge, pas de pied. */
+@page couverture {
+  margin: 0;
+}
+
+@media print {
+
+  /* Bascule de l'unité typographique : tout le reste suit. */
+  html { font-size: 10.5pt; }
+
+  body {
+    background: var(--blanc);
+    color: var(--noir-pur);
+  }
+
+  .doc { padding: 0; }
+
+  /* La feuille écran s'efface, @page prend la main. */
+  .page {
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    break-after: page;
+  }
+
+  .page:last-of-type { break-after: auto; }
+
+  .couverture {
+    page: couverture;
+    min-height: 297mm;
+    height: 297mm;
+    padding: 34mm 20mm 26mm;
+    break-after: page;
+  }
+
+  /* La grille redevient un vrai tableau : thead et tfoot se répètent sur
+     chaque page et leur hauteur est retirée de la zone de texte. */
+  .grille { display: table; width: 100%; }
+  .grille > thead { display: table-header-group; }
+  .grille > tbody { display: table-row-group; }
+  .grille > tfoot { display: table-footer-group; }
+  .grille > * > tr { display: table-row; }
+  .grille > * > tr > td { display: table-cell; }
+
+  .entete-courant {
+    display: flex;
+    justify-content: space-between;
+    gap: 8mm;
+    padding-bottom: 2mm;
+    margin-bottom: 6mm;
+    border-bottom: var(--filet) solid var(--bordure);
+    text-transform: uppercase;
+  }
+
+  .pied-courant {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8mm;
+    padding-top: 2mm;
+    margin-top: 6mm;
+    border-top: var(--filet) solid var(--noir);
+  }
+
+  .pied-courant__mention {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--noir-pur);
+  }
+
+  /* Le pied écran ferait doublon avec le pied courant. */
+  .pied { display: none; }
+
+  /* Veuves et orphelines. Trois lignes minimum de part et d'autre d'un saut. */
+  p, li, blockquote, dd {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h1, h2, h3, h4 {
+    break-after: avoid;
+    break-inside: avoid;
+  }
+
+  /* Un titre ne finit jamais une page. Les deux blocs qui suivent restent
+     collés à lui. */
+  h2 + *, h3 + *, h4 + * { break-before: avoid; }
+
+  blockquote,
+  .verbatim,
+  .encadre,
+  .chiffre,
+  figure,
+  pre,
+  tbody tr { break-inside: avoid; }
+
+  /* En-tête de tableau répété si le tableau franchit une page. */
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+
+  table { break-inside: auto; }
+
+  /* Les liens perdent leur cible à l'impression : on l'écrit. Les ancres
+     internes et les mailto restent muettes, l'URL n'apporterait rien. */
+  a[href^="http"]::after {
+    content: "(" attr(href) ")";
+    display: inline-block;
+    margin-left: 0.35em;
+    text-decoration: none;
+    font-size: var(--t-micro);
+    color: var(--gris-500);
+    word-break: break-all;
+  }
+
+  a { text-decoration-color: var(--gris-400); }
+
+  /* Rien ne doit déborder de la zone de texte. */
+  .tableau-conteneur,
+  pre { overflow: visible; }
+
+  /* Mesuré : dans une cellule de la grille, Chrome ignore un `break-after`
+     posé sur le sommaire, mais respecte un `break-before` posé sur le corps.
+     Le sommaire garde donc sa page grâce au bloc suivant, pas à lui-même. */
+  .corps { break-before: page; }
+}
+
+/* -----------------------------------------------------------------------------
+   15. ÉCRAN ÉTROIT
+   Le document reste lisible sur un portable ou un téléphone. La géométrie A4
+   ne s'applique qu'au-delà de la largeur d'une feuille.
+   -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 230mm) {
+  .page,
+  .pied {
+    width: 100%;
+    min-height: 0;
+    padding-left: var(--esp-4);
+    padding-right: var(--esp-4);
+  }
+
+  .couverture {
+    min-height: 0;
+    padding: var(--esp-12) var(--esp-4);
+  }
+
+  .couverture__titre { font-size: 2.2rem; }
+  .couverture__cartouche { gap: var(--esp-4); }
+  html { font-size: 15px; }
+}

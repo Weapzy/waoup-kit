@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  WAOUP — Gabarit de livrable
+  Fichier : assets/gabarit-livrable.html
+
+  Deux usages.
+
+  1. Modèle à copier. Ouvrir dans un navigateur, dupliquer le fichier, remplacer
+     le contenu à la main. Il s'affiche tel quel, sans serveur.
+
+  2. Cible d'injection pour scripts/md_vers_html.py. Le script remplit les
+     emplacements marqués et remplace tout ce qui se trouve entre les balises
+     waoup:sommaire:debut/fin (la page de sommaire entière) et
+     waoup:contenu:debut/fin (le corps du document). Ne pas déplacer ces
+     quatre commentaires : sans eux, le script s'arrête avec une erreur.
+
+  EMPLACEMENTS. Un attribut data-waoup="clé" signale un contenu remplaçable.
+  Le script écrase l'intérieur de CHAQUE élément portant la clé. Un élément
+  porteur d'une clé ne doit pas contenir de balise de même nom que la sienne.
+      titre-page   titre de l'onglet du navigateur
+      client       nom du client
+      titre        titre du livrable
+      sous-titre   phrase de cadrage, sous le filet lime
+      date         date d'émission
+      reference    référence interne du document
+      confidentiel mention de confidentialité (vide = mention masquée)
+
+  L'exemple ci-dessous est fictif. Groupe Ardan n'existe pas.
+-->
+<title data-waoup="titre-page">Groupe Ardan — Reprendre la main sur le parc de location</title>
+<link rel="stylesheet" href="waoup-charte.css">
+</head>
+<body>
+
+<article class="doc">
+
+  <!-- ====================================================================
+       PAGE DE GARDE
+       ==================================================================== -->
+  <section class="page couverture">
+    <p class="couverture__marque">WAOUP · Business design</p>
+
+    <div class="couverture__bloc">
+      <p class="couverture__client" data-waoup="client">Groupe Ardan</p>
+      <h1 class="couverture__titre" data-waoup="titre">Reprendre la main sur le parc de location</h1>
+      <div class="couverture__filet"></div>
+      <p class="couverture__sous-titre" data-waoup="sous-titre">Restitution de la phase Décoder : dix-sept entretiens sur quatre agences, trois enjeux retenus, une proposition de trajectoire à douze mois.</p>
+
+      <dl class="couverture__cartouche">
+        <div>
+          <dt>Livrable</dt>
+          <dd>Restitution d'entretiens</dd>
+        </div>
+        <div>
+          <dt>Phase</dt>
+          <dd>Décoder</dd>
+        </div>
+        <div>
+          <dt>Date</dt>
+          <dd data-waoup="date">12 septembre 2026</dd>
+        </div>
+        <div>
+          <dt>Référence</dt>
+          <dd data-waoup="reference">260912 ARDAN - RESTIT - V2</dd>
+        </div>
+      </dl>
+
+      <p class="couverture__confidentiel" data-waoup="confidentiel">Document confidentiel — diffusion restreinte</p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       GRILLE D'IMPRESSION
+       Ce tableau n'est pas une mise en page : c'est le seul moyen d'obtenir
+       un en-tête et un pied RÉPÉTÉS sur chaque page du PDF, avec leur place
+       réservée. À l'écran le CSS le neutralise en blocs ordinaires.
+       La couverture reste au-dessus, hors grille : elle ne porte ni en-tête
+       ni pied. Ne pas déplacer thead / tbody / tfoot.
+       ==================================================================== -->
+  <table class="grille">
+
+    <thead>
+      <tr><td>
+        <div class="entete-courant">
+          <span data-waoup="client">Groupe Ardan</span>
+          <span data-waoup="titre">Reprendre la main sur le parc de location</span>
+        </div>
+      </td></tr>
+    </thead>
+
+    <tbody>
+      <tr><td>
+
+  <!-- ====================================================================
+       SOMMAIRE
+       ==================================================================== -->
+<!-- waoup:sommaire:debut -->
+  <section class="page sommaire">
+    <h2 class="sommaire__titre">Sommaire</h2>
+    <ol>
+      <li><a href="#s1">Le parc tourne, la marge non</a></li>
+      <li><a href="#s2">Trois enjeux sortent des entretiens</a></li>
+      <li><a href="#s3">Ce que dit le taux d'immobilisation</a></li>
+      <li><a href="#s4">Notre proposition : une trajectoire en trois temps</a></li>
+      <li><a href="#s5">Ce que cette restitution ne dit pas</a></li>
+    </ol>
+  </section>
+<!-- waoup:sommaire:fin -->
+
+  <!-- ====================================================================
+       CORPS
+       ==================================================================== -->
+  <main class="page corps">
+<!-- waoup:contenu:debut -->
+
+    <h2 id="s1">Le parc tourne, la marge non</h2>
+
+    <p class="chapo">Dix-sept entretiens menés entre le 3 et le 28 août 2026, sur les agences de Rouen, Le Havre, Caen et Alençon. Chefs d'agence, techniciens de maintenance, commerciaux itinérants, deux clients loueurs. Le constat est net : le parc de matériel BTP du Groupe Ardan est utilisé, demandé, et pourtant il perd de l'argent sur trois familles.</p>
+
+    <p>Le sujet posé au départ portait sur le renouvellement du parc. Les entretiens l'ont déplacé. Personne ne parle d'acheter des machines. Tout le monde parle de savoir où elles sont, dans quel état, et à qui les promettre. La question de l'investissement arrive après celle du pilotage.</p>
+
+    <div class="chiffre">
+      <span class="chiffre__valeur">31 %</span>
+      <span class="chiffre__libelle">du parc nacelles est immobilisé plus de quinze jours par trimestre, hors maintenance planifiée. Source : extraction ERP, T2 2026.</span>
+    </div>
+
+    <div class="encadre encadre--cle">
+      <p class="encadre__titre">À retenir</p>
+      <p>Le problème n'est pas la taille du parc. C'est le délai entre le retour d'une machine et sa remise en location, aujourd'hui de <strong>onze jours en moyenne</strong> sur les nacelles, contre trois jours annoncés au client.</p>
+    </div>
+
+    <h2 id="s2">Trois enjeux sortent des entretiens</h2>
+
+    <h3>Le retour de matériel n'a pas de propriétaire</h3>
+
+    <p>Quand une machine revient, quatre personnes peuvent la prendre en charge, et aucune n'en a la responsabilité formelle. Le résultat est un temps mort qui ne se voit dans aucun indicateur, parce qu'il tombe entre le module location et le module atelier.</p>
+
+    <ul>
+      <li>Le chauffeur dépose la machine sur le parc et repart. Aucun contrôle à la descente du camion.</li>
+      <li>Le technicien découvre l'état réel au moment où il ouvre la fiche, parfois trois jours plus tard.</li>
+      <li>Le commercial continue de vendre la machine comme disponible, puis décale le client.</li>
+    </ul>
+
+    <blockquote>
+      <p>« On a arrêté de regarder le planning il y a deux ans. Il ment. On appelle l'atelier, c'est plus rapide. »</p>
+      <footer>Entretien Ardan · chef d'agence · Le Havre · 14 ans d'ancienneté</footer>
+    </blockquote>
+
+    <h3>La maintenance est curative par défaut, pas par choix</h3>
+
+    <p>Les techniciens décrivent tous le même mécanisme. Le préventif est planifié, puis déprogrammé dès qu'une machine louée tombe en panne. Sur quatre agences, aucune n'a tenu son plan de maintenance préventive au-delà de deux mois consécutifs en 2026.</p>
+
+    <div class="encadre encadre--alerte">
+      <p class="encadre__titre">Point de vigilance</p>
+      <p>Deux techniciens sur les quatre rencontrés partent en retraite avant juin 2027. Les procédures de contrôle au retour ne sont écrites nulle part. Elles sortiront de l'entreprise avec eux.</p>
+    </div>
+
+    <h3>Les agences ne se prêtent pas de matériel</h3>
+
+    <p>Rouen et Le Havre sont à soixante-dix kilomètres. Les deux agences ont refusé des locations le même mois sur des références que l'autre avait disponibles. Le transfert existe dans l'outil. Il n'est pas utilisé, parce que le chiffre d'affaires reste sur l'agence prêteuse et la charge sur l'agence receveuse.</p>
+
+    <div class="encadre encadre--info">
+      <p class="encadre__titre">Contexte</p>
+      <p>La règle d'affectation du chiffre d'affaires date de la fusion de 2019. Elle n'a jamais été rouverte. Trois interlocuteurs sur quatre pensent qu'elle est imposée par le groupe. Elle ne l'est pas.</p>
+    </div>
+
+    <h2 id="s3">Ce que dit le taux d'immobilisation</h2>
+
+    <p>Le tableau ci-dessous croise les données ERP du deuxième trimestre 2026 avec ce que les entretiens ont fait remonter. La colonne « écart ressenti » indique la différence entre le délai annoncé aux commerciaux et le délai réellement constaté par les techniciens.</p>
+
+    <table>
+      <caption>Immobilisation par famille de matériel — T2 2026, quatre agences</caption>
+      <thead>
+        <tr>
+          <th scope="col">Famille</th>
+          <th scope="col" class="num">Parc</th>
+          <th scope="col" class="num">Taux d'immobilisation</th>
+          <th scope="col" class="num">Délai réel de remise</th>
+          <th scope="col" class="num">Écart ressenti</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Nacelles</th>
+          <td class="num">84</td>
+          <td class="num">31 %</td>
+          <td class="num">11 j</td>
+          <td class="num">+ 8 j</td>
+        </tr>
+        <tr>
+          <th scope="row">Mini-pelles</th>
+          <td class="num">62</td>
+          <td class="num">18 %</td>
+          <td class="num">6 j</td>
+          <td class="num">+ 3 j</td>
+        </tr>
+        <tr>
+          <th scope="row">Compacteurs</th>
+          <td class="num">37</td>
+          <td class="num">24 %</td>
+          <td class="num">9 j</td>
+          <td class="num">+ 6 j</td>
+        </tr>
+        <tr>
+          <th scope="row">Groupes électrogènes</th>
+          <td class="num">51</td>
+          <td class="num">9 %</td>
+          <td class="num">3 j</td>
+          <td class="num">0 j</td>
+        </tr>
+        <tr>
+          <th scope="row">Outillage porté</th>
+          <td class="num">310</td>
+          <td class="num">6 %</td>
+          <td class="num">2 j</td>
+          <td class="num">0 j</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th scope="row">Parc total</th>
+          <td class="num">544</td>
+          <td class="num">14 %</td>
+          <td class="num">5 j</td>
+          <td class="num">+ 3 j</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <p>Les deux dernières lignes du tableau sont la démonstration. Les groupes électrogènes et l'outillage porté tiennent leurs délais, parce qu'ils passent par un contrôle systématique au retour, hérité de l'ancienne agence d'Alençon. Le mécanisme existe déjà dans la maison. Il n'a jamais été étendu.</p>
+
+    <div class="encadre encadre--fort">
+      <p class="encadre__titre">Le twist</p>
+      <p>Ardan n'a pas besoin d'importer une méthode. <strong>La bonne pratique est déjà là</strong>, sur deux familles de matériel, tenue par une agence. Le chantier est un chantier de diffusion interne, pas de transformation.</p>
+    </div>
+
+    <h2 id="s4">Notre proposition : une trajectoire en trois temps</h2>
+
+    <p>Trois séquences, douze mois, un porteur nommé à chaque étape. Aucune ne demande d'investissement matériel.</p>
+
+    <ol>
+      <li><strong>Octobre à décembre 2026 — Écrire le contrôle au retour.</strong> Deux jours d'atelier avec les techniciens d'Alençon pour formaliser ce qu'ils font déjà. Sortie : une fiche de contrôle d'une page, testée sur les nacelles de Rouen.</li>
+      <li><strong>Janvier à mars 2027 — Nommer un responsable de retour par agence.</strong> Pas un recrutement : une attribution explicite, avec dix minutes de point quotidien entre atelier et location.</li>
+      <li><strong>Avril à septembre 2027 — Rouvrir la règle d'affectation.</strong> Un arbitrage direction sur le partage du chiffre d'affaires en cas de transfert inter-agences, puis mesure sur deux trimestres.</li>
+    </ol>
+
+    <h3>Ce que cela demande à la direction</h3>
+
+    <p>Une décision, pas un budget. La règle d'affectation du chiffre d'affaires est le seul point qui ne se traite pas au niveau des agences. Tant qu'elle n'est pas rouverte, la troisième séquence ne démarre pas et les deux premières plafonnent.</p>
+
+    <blockquote>
+      <p>« Je peux prêter une nacelle à Rouen. Ce que je ne peux pas, c'est expliquer à mon équipe pourquoi on l'a fait quand la prime tombe en février. »</p>
+      <footer>Entretien Ardan · chef d'agence · Caen</footer>
+    </blockquote>
+
+    <h2 id="s5">Ce que cette restitution ne dit pas</h2>
+
+    <p>Trois trous assumés, à combler avant la propale.</p>
+
+    <ul>
+      <li>Aucun client final n'a été interrogé sur le délai. Les huit jours d'écart sont documentés en interne, pas côté marché. Nous ne savons pas ce qu'ils coûtent en affaires perdues.</li>
+      <li>L'agence d'Alençon n'a été vue qu'une demi-journée. C'est elle qui détient la pratique à diffuser. Elle mérite une vague d'entretiens à part entière.</li>
+      <li>Le coût réel d'une immobilisation n'a pas été chiffré. Le contrôle de gestion l'a en base, personne ne l'avait sorti au moment des entretiens.</li>
+    </ul>
+
+    <p>Ces trois manques ne changent pas le diagnostic. Ils changent la façon de le vendre en interne. Le premier surtout : sans chiffrage marché, la trajectoire se défendra sur du bon sens, pas sur un montant.</p>
+
+<!-- waoup:contenu:fin -->
+  </main>
+
+  <!-- ====================================================================
+       PIED DE PAGE — visible à l'écran, remplacé par .pied-courant en PDF
+       ==================================================================== -->
+  <footer class="pied">
+    <span data-waoup="client">Groupe Ardan</span>
+    <span class="pied__mention" data-waoup="confidentiel">Document confidentiel — diffusion restreinte</span>
+    <span>WAOUP · <span data-waoup="date">12 septembre 2026</span></span>
+  </footer>
+
+      </td></tr>
+    </tbody>
+
+    <tfoot>
+      <tr><td>
+        <div class="pied-courant">
+          <span data-waoup="client">Groupe Ardan</span>
+          <span class="pied-courant__mention" data-waoup="confidentiel">Document confidentiel — diffusion restreinte</span>
+          <span data-waoup="date">12 septembre 2026</span>
+        </div>
+      </td></tr>
+    </tfoot>
+
+  </table>
+
+</article>
+
+</body>
+</html>

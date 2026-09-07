@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "waoup",
+  "description": "Le kit de travail WAOUP : les procédures maison de la phase Décoder au livrable signé.",
+  "version": "1.0.0",
+  "owner": {
+    "name": "Weapzy",
+    "email": "matt@weapzy.com",
+    "url": "https://weapzy.com"
+  },
+  "metadata": {
+    "pluginRoot": "."
+  },
+  "plugins": [
+    {
+      "name": "waoup",
+      "displayName": "Kit WAOUP",
+      "source": "./waoup",
+      "description": "Les procédures WAOUP : guide d'entretien, restitution, propale, défis, synthèse marathon, deck, charte et anonymisation. Le kit que l'équipe partage.",
+      "version": "1.0.0",
+      "author": {
+        "name": "WAOUP",
+        "url": "https://waoup.com"
+      },
+      "license": "Proprietary",
+      "category": "productivity",
+      "keywords": [
+        "conseil",
+        "entretien",
+        "restitution",
+        "propale",
+        "waoup"
+      ]
+    },
+    {
+      "name": "waoup-commerce",
+      "displayName": "Kit WAOUP · Commerce",
+      "source": "./waoup-commerce",
+      "description": "Le développement commercial : compte rendu de rendez-vous depuis l'audio, panorama d'entreprise, bibliothèque de cas clients, business case adapté à l'interlocuteur.",
+      "version": "1.1.0",
+      "author": {
+        "name": "WAOUP",
+        "url": "https://waoup.com"
+      },
+      "license": "Proprietary",
+      "category": "productivity",
+      "keywords": [
+        "commerce",
+        "crm",
+        "prospection",
+        "business-case"
+      ]
+    },
+    {
+      "name": "waoup-forge",
+      "displayName": "La Forge WAOUP",
+      "source": "./waoup-forge",
+      "description": "Le plugin qui fabrique votre kit. Il vous interroge, lit vos documents, écrit vos skills, livre le paquet partageable, puis se retire.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Weapzy",
+        "url": "https://weapzy.com"
+      },
+      "license": "Proprietary",
+      "category": "productivity",
+      "keywords": [
+        "setup",
+        "forge",
+        "plugin",
+        "skills",
+        "waoup"
+      ]
+    }
+  ]
+}

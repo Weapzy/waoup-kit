@@ -1,0 +1,17 @@
+{
+  "name": "waoup-commerce",
+  "displayName": "Kit WAOUP · Commerce",
+  "version": "1.1.0",
+  "description": "Le développement commercial WAOUP : compte rendu de rendez-vous, panorama d'entreprise avant rendez-vous, bibliothèque de cas clients et business case adapté à l'interlocuteur.",
+  "author": {
+    "name": "WAOUP",
+    "url": "https://waoup.com"
+  },
+  "license": "Proprietary",
+  "keywords": [
+    "commerce",
+    "crm",
+    "prospection",
+    "business-case"
+  ]
+}
